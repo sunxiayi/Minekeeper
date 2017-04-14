@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+		<title>Demo</title>
+		<style style="text/css">
+			.minefield {
+				line-height: 0;
+				border-spacing: 0;
+			}
+
+			.minefield td {
+				padding: 0
+			}
+		</style>
+	</head>
+	<body ng-controller="gameController">
+		<h1 style="font-family: 'Courier New', Monospace; margin-left: 37%; margin-top: 10%">Minekeeper Demo</h1>
+		<p style="font-family: Georgia, Sans-serif; margin-left: 37%">Disclaimer: Fall in love with spicy food is not my fault.</h3>
+		<div>
+			<table class="minefield" style="margin-left: 40%; margin-top: 5%">
+				<tr ng-repeat="row in minefield.rows">
+					<td ng-repeat="spot in row.spots" ng-click="uncoverSpot(spot)" ng-mousedown="rightClick($event, spot)" oncontextmenu="return false">
+                		<img ng-if="spot.isCovered && !spot.isFlag" src="static/images/covered.png" />
+                		<img ng-if="!spot.isCovered && spot.content == 'empty'" src="static/images/empty.png" />
+                		<img ng-if="!spot.isCovered && spot.content == 'mine'" src="static/images/mine.png" />
+                		<img ng-if="!spot.isCovered && spot.content == 1" src="static/images/number-1.png" />
+                		<img ng-if="!spot.isCovered && spot.content == 2" src="static/images/number-2.png" />
+                		<img ng-if="!spot.isCovered && spot.content == 3" src="static/images/number-3.png" />
+                		<img ng-if="!spot.isCovered && spot.content == 4" src="static/images/number-4.png" />
+                		<img ng-if="!spot.isCovered && spot.content == 5" src="static/images/number-5.png" />
+                		<img ng-if="!spot.isCovered && spot.content == 6" src="static/images/number-6.png" />
+                		<img ng-if="!spot.isCovered && spot.content == 7" src="static/images/number-7.png" />
+                		<img ng-if="!spot.isCovered && spot.content == 8" src="static/images/number-8.png" />
+                		<img ng-if="spot.isFlag" src="static/images/flag.png" />
+					</td>
+				</tr>
+			</table>
+			<h3 ng-if="isWinMessage" style="margin-left: 35%">You Won!</h3>
+			<h3 ng-if="lostMessage" style="margin-left: 25%">You Lose!(You can continue to click to see where mines are)</h3>
+			<button class="btn btn-primary" ng-click="reStart()" style="margin-top:10px; margin-left: 45%">Restart</button>
+		</div>
+
+		<script src="static/js/minekeeper.js"></script>
+	</body>
+</html>
